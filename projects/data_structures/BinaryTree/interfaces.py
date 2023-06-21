@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, TypeVar
+from typing import Literal, TypeVar, Type
 from abc import ABC, abstractmethod
 
 
@@ -12,6 +12,7 @@ class IBinaryTree(ABC):
     """
 
     def __init__(self, value) -> None:
+        super().__init__()
         self._value = value
 
         self._leftChild = None
