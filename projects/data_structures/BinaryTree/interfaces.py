@@ -25,10 +25,7 @@ class IBinaryTree(ABC):
     @abstractmethod
     def append(self, value) -> None:
         """Adds a new value to the binary tree."""
-        # check if head value is None:
-        if self._value is None:
-            self._value = value
-            return 
+        
 
     @abstractmethod
     def flatten(self, method: Literal['inorder', 'preorder', 'postorder'] = 'inorder') -> list:
@@ -41,3 +38,41 @@ class IBinaryTree(ABC):
     @abstractmethod
     def display(self, method: Literal['inorder', 'preorder', 'postorder'] = 'inorder', indent: str = '\t') -> None:
         """Traverses and prints the binary tree with the method passed with indentation."""
+        if method == 'inorder':
+            if self._leftChild is not None:
+                # go left
+                self._leftChild.display(method=method, indent=indent)
+
+            if self._value is not None:
+                # print root
+                print(self._value)
+
+            if self._rightChild is not None:
+                # go right
+                self._rightChild.display(method=method, indent=indent)
+
+        if method == 'preorder':
+            if self._value is not None:
+                # print root
+                print(self._value)
+
+            if self._leftChild is not None:
+                # go left
+                self._leftChild.display(method=method, indent=indent)
+
+            if self._rightChild is not None:
+                # go right
+                self._rightChild.display(method=method, indent=indent)
+
+        if method == 'postorder':
+            if self._leftChild is not None:
+                # go left
+                self._leftChild.display(method=method, indent=indent)
+
+            if self._rightChild is not None:
+                # go right
+                self._rightChild.display(method=method, indent=indent)
+
+            if self._value is not None:
+                # print root
+                print(self._value)

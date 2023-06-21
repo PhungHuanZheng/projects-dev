@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from typing import Literal, TypeVar
-from abc import ABC, abstractmethod
 
 from interfaces import IBinaryTree
 
@@ -14,7 +13,9 @@ class UniqueBinaryTree(IBinaryTree):
         return super().depth()
     
     def append(self, value) -> None:
-        super().append(value)
+        if self._value is None:
+            self._value = value
+            return 
 
         # check that value doesn't already exist
         if self.contains(value):
@@ -39,7 +40,7 @@ class UniqueBinaryTree(IBinaryTree):
                 # go into left child
                 self._leftChild.append(value)
     
-    def flatten(self, method: Literal['inorder', 'preorder', 'postorder'] = 'inorder') -> list:
+    def flatten(self, method: Literal['inorder', 'preorder', 'postorder'] = 'inorder', __list: list = []) -> list:
         return super().flatten(method)
     
     def contains(self, value) -> bool:
