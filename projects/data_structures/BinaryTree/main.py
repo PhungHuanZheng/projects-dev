@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from BinaryTree.trees import UniqueBinaryTree
+from trees import UniqueBinaryTree
 
 
 def main():
-    tree = UniqueBinaryTree(10)
+    tree = UniqueBinaryTree()
+    tree.append(10)
 
 
 if __name__ == '__main__':

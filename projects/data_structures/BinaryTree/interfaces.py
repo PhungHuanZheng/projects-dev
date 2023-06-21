@@ -25,6 +25,10 @@ class IBinaryTree(ABC):
     @abstractmethod
     def append(self, value) -> None:
         """Adds a new value to the binary tree."""
+        # check if head value is None:
+        if self._value is None:
+            self._value = value
+            return
 
     @abstractmethod
     def flatten(self, method: Literal['inorder', 'preorder', 'postorder'] = 'inorder') -> list:
