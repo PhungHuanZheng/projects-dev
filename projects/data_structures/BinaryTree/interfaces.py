@@ -11,7 +11,7 @@ class IBinaryTree(ABC):
     different variations.
     """
 
-    def __init__(self, value) -> None:
+    def __init__(self, value = None) -> None:
         super().__init__()
         self._value = value
 
