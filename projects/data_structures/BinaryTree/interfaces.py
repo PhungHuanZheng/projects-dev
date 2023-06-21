@@ -15,8 +15,8 @@ class IBinaryTree(ABC):
         super().__init__()
         self._value = value
 
-        self._leftChild = None
-        self._rightChild = None
+        self._leftChild: IBinaryTree = None
+        self._rightChild: IBinaryTree = None
 
     @abstractmethod
     def depth(self) -> int:
@@ -28,7 +28,7 @@ class IBinaryTree(ABC):
         # check if head value is None:
         if self._value is None:
             self._value = value
-            return
+            return 
 
     @abstractmethod
     def flatten(self, method: Literal['inorder', 'preorder', 'postorder'] = 'inorder') -> list:
