@@ -13,6 +13,7 @@ class UniqueBinaryTree(IBinaryTree):
         return super().depth()
     
     def append(self, value) -> None:
+        # if no head value, set as head
         if self._value is None:
             self._value = value
             return 
@@ -24,28 +25,25 @@ class UniqueBinaryTree(IBinaryTree):
         # check value against parent value
         if value > self._value:
             # if right child doesnt exist
-            if self._rightChild is None:
-                self._rightChild = UniqueBinaryTree(value)
+            if self._right_child is None:
+                self._right_child = UniqueBinaryTree(value)
                 
             else:
                 # go into right child
-                self._rightChild.append(value)
+                self._right_child.append(value)
             
         else:
             # if right child doesnt exist
-            if self._leftChild is None:
-                self._leftChild = UniqueBinaryTree(value)
+            if self._left_child is None:
+                self._left_child = UniqueBinaryTree(value)
 
             else:
                 # go into left child
-                self._leftChild.append(value)
+                self._left_child.append(value)
     
     def flatten(self, method: Literal['inorder', 'preorder', 'postorder'] = 'inorder', __list: list = []) -> list:
         return super().flatten(method)
     
     def contains(self, value) -> bool:
         return super().contains(value)
-    
-    def display(self, method: Literal['inorder', 'preorder', 'postorder'] = 'inorder', indent: str = '\t') -> None:
-        return super().display(method, indent)
         

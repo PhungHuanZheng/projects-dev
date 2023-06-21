@@ -5,11 +5,12 @@ from trees import UniqueBinaryTree
 
 def main():
     tree = UniqueBinaryTree()
-    tree.append(10)
-    tree.append(5)
-    tree.append(110)
+    for i in range(10):
+        tree.append(10)
+
+    print(tree.contains(10))
     
-    tree.display(method='inorder')
+    tree.display(method='preorder')
 
 
 if __name__ == '__main__':
