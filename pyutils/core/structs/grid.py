@@ -40,7 +40,7 @@ class ICell(ABC):
         self.y = y
 
     def __str__(self) -> str:
-        return '▣'
+        return '[]'
     
 
 class Grid:
