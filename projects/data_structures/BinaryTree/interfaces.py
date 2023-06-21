@@ -35,7 +35,6 @@ class IBinaryTree(ABC):
     def contains(self, value) -> bool:
         """Searches the binary tree and returns whether the value passed exists within."""
 
-    @abstractmethod
     def display(self, method: Literal['inorder', 'preorder', 'postorder'] = 'inorder', indent: str = '\t') -> None:
         """Traverses and prints the binary tree with the method passed with indentation."""
         if method == 'inorder':
