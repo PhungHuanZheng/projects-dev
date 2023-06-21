@@ -8,7 +8,7 @@ import pandas as pd
 
 
 class BaseDataset:
-    def __init__(self, data: pd.DataFrame = None) -> None:
+    def __init__(self, data: pd.DataFrame) -> None:
         self._data = data
 
     def to_chunks(self, chunk_size: int = 5000) -> Iterator[pd.DataFrame]:
@@ -32,4 +32,3 @@ class BaseDataset:
         # return as generator object
         for i, bound in enumerate(chunk_bounds[:-1]):
             yield self._data[bound:chunk_bounds[i + 1]]
-            
