@@ -83,7 +83,7 @@ class Grid {
                 let otherCell = this.cellAt(waterCell.pos.x + relPos[0], waterCell.pos.y + relPos[1]);
 
                 // if out of bounds or already water, ignore
-                if (!otherCell || otherCell.hasWater || otherCell.isObsidian) continue;
+                if (!otherCell || otherCell.hasWater || otherCell.isObsidian || otherCell.isLavaSource) continue;
 
                 // if other cell on left
                 if (waterCell.pos.x - otherCell.pos.x > 0) {
@@ -131,7 +131,7 @@ class Grid {
                 let otherCell = this.cellAt(lavaCell.pos.x + relPos[0], lavaCell.pos.y + relPos[1]);
 
                 // if out of bounds or already water, ignore
-                if (!otherCell || otherCell.hasLava || otherCell.isObsidian) continue;
+                if (!otherCell || otherCell.hasLava || otherCell.isObsidian || otherCell.isWaterSource) continue;
 
                 // if other cell on left
                 if (lavaCell.pos.x - otherCell.pos.x > 0) {
@@ -177,7 +177,7 @@ class Grid {
                 let cell = this.cellAt(x, y);
                 
                 // check if both is lava and is water
-                if (cell.hasWater && cell.hasLava) {
+                if (cell.hasWater && cell.hasLava && !(cell.isLavaSource || cell.isWaterSource)) {
                     // set obsidian, remove rights
                     cell.isObsidian = true;
                     this.clearLiquids();
