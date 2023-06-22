@@ -1,6 +1,5 @@
 let grid;
 
-
 function setup() {
     createCanvas(windowWidth, windowHeight);
     
@@ -19,7 +18,6 @@ function mousePressed() {
     let gridX = floor((mouseX - grid.startingX) / grid.cellLength);
     let gridY = floor((mouseY - grid.startingY) / grid.cellLength);
 
-    
     // rotate at cell clicked
     grid.rotateCell(gridX, gridY)
 }
