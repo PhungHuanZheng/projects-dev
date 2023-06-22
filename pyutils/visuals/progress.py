@@ -98,21 +98,3 @@ class MultipleProgressBar:
         self._generate_bars()   
         if self.all_done:  
             sys.exit()
-
-
-def main():
-    a = MultipleProgressBar(['bar 1', 'hello 2', 'goodbye 3'], [130, 130, 130], characters=('#', ' '))
-
-    while True:
-        try:
-            time.sleep(0.01)
-            a.update(random.randint(0, 2))
-            a.update(random.randint(0, 2))
-        except Exception:
-            pass
-
-        
-
-
-if __name__ == '__main__':
-    main()
