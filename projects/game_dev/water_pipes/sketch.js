@@ -3,7 +3,7 @@ let grid;
 function setup() {
     createCanvas(windowWidth, windowHeight);
     
-    grid = new Grid(10, 10, 60);
+    grid = new Grid(20, 20, 30);
 }
 
 function draw() {
