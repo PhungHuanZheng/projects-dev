@@ -40,7 +40,11 @@ class Grid {
     }
 
     rotateCell(x, y) {
-        this.cellAt(x, y).rotate();
+        let cell = this.cellAt(x, y);
+        if (!cell) 
+            return;
+
+        cell.rotate();
         this.clearLiquids()
     }
 
