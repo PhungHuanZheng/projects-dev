@@ -1,16 +1,21 @@
 const G = 9.8;
 
-let pendulum;
+let pendulums = []
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    
-    pendulum = new Pendulum(width / 2, 0, 300, 20, PI / 2);
+
+    for (let i = 0; i < 40; i++) {
+        pendulums.push(new Pendulum(width / 2, 0, 20 + i * 20, 20, HALF_PI))
+    }
 }
 
 function draw() {
     background(0);
 
-    pendulum.update(frameCount, 5)
-    pendulum.show()
+    for (const p of pendulums) {
+        p.update(frameCount, 5)
+        p.show()
+    }
+
 }

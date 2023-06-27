@@ -28,20 +28,16 @@ class Pendulum {
         return atan(diffX / diffY);
     }
 
-    update(t, interval) {
-        if (t % interval == 0) {
-            // get position of bob at time t with formula: https://en.wikipedia.org/wiki/Pendulum#Period_of_oscillation,
-            // where T is the period of the pendulum given initial conditions
-            let period = 2 * PI * sqrt(this.cordLength / G);
+    update(t, smoothness) {
+        // get position of bob at time t with formula: https://en.wikipedia.org/wiki/Pendulum#Period_of_oscillation,
+        // where T is the period of the pendulum given initial conditions
+        let period = 2 * PI * sqrt(this.cordLength / G);
 
-            // get angle of pendulum at time t
-            let angle = this.initialAngle * cos(((TWO_PI) / period) * this.#internalTimer);
+        // get angle of pendulum at time t
+        let angle = this.initialAngle * cos(((TWO_PI) / period) * (t / smoothness));
 
-            // get position from angle from points on circle with radius [cordLength]
-            this.bobPos = this.angleToPos(angle);
-            this.#internalTimer++;
-
-        }
+        // get position from angle from points on circle with radius [cordLength]
+        this.bobPos = this.angleToPos(angle);
     }
 
     show() {
