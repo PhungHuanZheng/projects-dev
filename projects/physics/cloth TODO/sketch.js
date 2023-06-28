@@ -1,51 +1,34 @@
 let cloth;
 let selected;
 
+
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
-    cloth = new Cloth(10, 5, 40, 0.2)
+    cloth = new Cloth(20, 10, 30, 0.9);
+    cloth.addFixtures([0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19])
 }
 
 function draw() {
-    background(0)
+    background(0);
 
-    for (let pt of cloth.data.flat()) {
-        pt.update()
-    }
     cloth.update()
     cloth.show()
 }
 
 function mousePressed() {
-    // iterate over points in cloth
-    for (let pt of cloth.data.flat()) {
-        // if point is fixed, ignore
-        if (pt.isFixed) continue;
-
-        // if within selection distance
-        let d = dist(mouseX, mouseY, pt.canvasX, pt.canvasY);
-        if (d < pt.selectionDist / 2) {
-            pt.isBeingDragged = true;
-            selected = pt;
-        }
-    }
+    // for (let node of cloth.flatNodes) {
+    //     let d = dist(mouseX, mouseY, node.pos.x, node.pos.y);
+    //     if (d < node.selectionRadius) {
+    //         selected = node;
+    //         node.pos = createVector(mouseX, mouseY)
+    //         break
+    //     }
+    // }
 }
 
 function mouseReleased() {
-    if (!selected) return;
-
-    selected.isBeingDragged = false;
-    selected = undefined;
 }
 
 function keyPressed() {
-    // iterate over points in cloth
-    for (let pt of cloth.data.flat()) {
-        // if within selection distance
-        let d = dist(mouseX, mouseY, pt.canvasX, pt.canvasY);
-        if (d < pt.selectionDist / 2) {
-            pt.isFixed = !pt.isFixed;
-        }
-    }
 }
