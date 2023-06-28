@@ -34,7 +34,7 @@ class Constraint {
             if (node.isFixed) continue;
 
             let nodePosDiff = this.center.copy().sub(node.pos);
-            nodePosDiff.mult(map(this.currentLength, this.minLength, this.maxLength, -0.45, 0.6));
+            nodePosDiff.mult(map(this.currentLength, this.minLength, this.maxLength, -0.9, 1));
             node.pos.add(nodePosDiff);
         }
     }

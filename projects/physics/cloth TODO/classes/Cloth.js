@@ -59,7 +59,7 @@ class Cloth {
             node.pos.y = constrain(node.pos.y, 0, height);
 
             // apply gravity
-            node.pos.y += 5
+            node.pos.y += 1
         }
 
         for (let i = 0; i < this.constraints.length; i++) {
