@@ -1,0 +1,25 @@
+{
+  "name": "projects-dev",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhungHuanZheng/projects-dev.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PhungHuanZheng/projects-dev/issues"
+  },
+  "homepage": "https://github.com/PhungHuanZheng/projects-dev#readme",
+  "devDependencies": {
+    "@types/p5": "^1.6.2"
+  }
+}
