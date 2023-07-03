@@ -23,22 +23,20 @@ class Projectile {
         this.pos.add(this.vel);
         this.vel.add(this.acc);
         this.acc.mult(0);
-
-        
     }
 
     show(clr) {
         fill(clr); stroke(255); strokeWeight(0.25)
-        circle(this.pos.x, this.pos.y, 5);
+        circle(this.pos.x, this.pos.y, 3);
 
-        this.trail.push(this.pos);
-        if (this.trail.length >= 25)
+        this.trail.push(this.pos.copy());
+        if (this.trail.length >= 10)
             this.trail.shift()
 
-        beginShape(LINES); stroke(255)
+        beginShape(LINES); strokeWeight(0.5); stroke(clr)
         for (const pt of this.trail) {
             vertex(pt.x, pt.y);
         }
-        endShape()
+        endShape();
     }
 }

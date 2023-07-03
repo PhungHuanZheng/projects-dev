@@ -12,7 +12,7 @@ function setup() {
 function draw() {
     background(0);
 
-    if (frameCount % 1 === 0) {
+    if (frameCount % 20 === 0) {
         let newProj = new Projectile(0, height / 2, 500);
         newProj.vel.x = random(40, 100);
         newProj.vel.y = random(-5, 5);
