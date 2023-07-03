@@ -4,7 +4,6 @@ class Projectile {
         this.vel = createVector(0, 0);
         this.acc = createVector(0, 0);
 
-        this.initialMag = null;
         this.homingRadius = homingRadius;
         this.trail = [];
     }
@@ -15,8 +14,8 @@ class Projectile {
             PosDiff = p5.Vector.normalize(PosDiff);
             PosDiff.mult(15);
 
-            this.vel.x = lerp(this.vel.x, PosDiff.x, 0.15);
-            this.vel.y = lerp(this.vel.y, PosDiff.y, 0.15);
+            this.vel.x = lerp(this.vel.x, PosDiff.x, 0.1);
+            this.vel.y = lerp(this.vel.y, PosDiff.y, 0.1);
         }
 
         // physics engine
@@ -30,10 +29,10 @@ class Projectile {
         circle(this.pos.x, this.pos.y, 3);
 
         this.trail.push(this.pos.copy());
-        if (this.trail.length >= 10)
+        if (this.trail.length >= 20)
             this.trail.shift()
 
-        beginShape(LINES); strokeWeight(0.5); stroke(clr)
+        beginShape(LINES); strokeWeight(0.75); stroke(clr)
         for (const pt of this.trail) {
             vertex(pt.x, pt.y);
         }

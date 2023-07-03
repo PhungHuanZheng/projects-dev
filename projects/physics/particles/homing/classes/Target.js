@@ -11,6 +11,9 @@ class Target {
         this.vel.add(this.acc);
         this.acc.mult(0)
 
+        this.vel.x = constrain(this.vel.x, -5, 5);
+        this.vel.y = constrain(this.vel.y, -5, 5);
+
         // constrain and bounce
         this.pos.x = constrain(this.pos.x, 0, width);
         if (this.pos.x <= 0 || this.pos.x >= width) this.vel.x *= -1;
