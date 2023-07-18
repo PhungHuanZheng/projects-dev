@@ -1,3 +1,5 @@
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.util.function.Function;
 
@@ -37,6 +39,19 @@ public class Matrix2D {
     }
 
     /*
+     * Utility methods
+     */
+    public static Matrix2D fromArray(float[] arr, int axis) {
+        Matrix2D M = new Matrix2D(1, arr.length);
+        M.data = new float[][] { arr };
+
+        if (axis == 1) {
+            M.transpose();
+        }
+        return M;
+    }
+
+    /*
      * Indexing methods to get row (axis 0) or column (axis 1) of matrix
      */
     public float[] getRow(int index) {
@@ -61,7 +76,6 @@ public class Matrix2D {
                 this.data[y][x] = (float) (Math.random() * (max - min) + min);
             }
         }
-
         // return self for method chaining
         return this;
     }
@@ -101,6 +115,16 @@ public class Matrix2D {
             }
         }
         return maxValue;
+    }
+
+    public float sum() {
+        float sum = 0;
+        for (int y = 0; y < this.shape[0]; y++) {
+            for (int x = 0; x < this.shape[1]; x++) {
+                sum += this.data[y][x];
+            }
+        }
+        return sum;
     }
 
     public void transpose() {
@@ -172,7 +196,7 @@ public class Matrix2D {
     }
 
     public void sub(Matrix2D M2) {
-        Matrix2D.checkEWCompatibility(this, M2, "add");
+        Matrix2D.checkEWCompatibility(this, M2, "sub");
 
         // iterate over matrix data
         for (int y = 0; y < this.shape[0]; y++) {
@@ -190,7 +214,7 @@ public class Matrix2D {
     }
 
     public void mult(Matrix2D M2) {
-        Matrix2D.checkEWCompatibility(this, M2, "add");
+        Matrix2D.checkEWCompatibility(this, M2, "mult");
 
         // iterate over matrix data
         for (int y = 0; y < this.shape[0]; y++) {
@@ -208,7 +232,7 @@ public class Matrix2D {
     }
 
     public void div(Matrix2D M2) {
-        Matrix2D.checkEWCompatibility(this, M2, "add");
+        Matrix2D.checkEWCompatibility(this, M2, "div");
 
         // iterate over matrix data
         for (int y = 0; y < this.shape[0]; y++) {
@@ -228,12 +252,18 @@ public class Matrix2D {
     /*
      * Basic matrix-value operations
      */
-    public void map(Function<Float, Float> lambda) {
+    public void mapLambda(Function<Float, Float> lambda) {
         for (int y = 0; y < this.shape[0]; y++) {
             for (int x = 0; x < this.shape[1]; x++) {
                 this.data[y][x] = lambda.apply(this.data[y][x]);
             }
         }
+    }
+
+    public void mapMethod(Object obj, Method method) throws IllegalAccessException, InvocationTargetException {
+        Matrix2D M = (Matrix2D)method.invoke(obj, this);
+        this.shape = new int[]{M.shape[0], M.shape[1]};
+        this.data = M.data;
     }
 
     /*

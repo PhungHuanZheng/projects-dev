@@ -8,7 +8,7 @@ public class LabelledDataset {
     public Matrix2D targets;
     public int classCount;
 
-    public LabelledDataset(String filepath, String delim, int classCount) {
+    public LabelledDataset(String filepath, String delim, int classCount, int classIndex) {
         float[][] data_ = null;
         int[] targets_ = null;
 
@@ -27,12 +27,14 @@ public class LabelledDataset {
                     targets_ = new int[lines.length];
                 }
 
-                targets_[i] = Integer.parseInt(line[0]);
-                for (int j = 0; j < line.length - 1; j++) {
-                    float num = Float.parseFloat(line[j + 1]);
+                targets_[i] = Integer.parseInt(line[classIndex]);
+                for (int j = 0; j < line.length; j++) {
+                    if (j == classIndex) {
+                        continue;
+                    }
+                    float num = Float.parseFloat(line[j]);
                     data_[i][j] = num;
                 }
-                System.out.println(i);
             }
 
         } catch (Exception e) {
@@ -57,5 +59,19 @@ public class LabelledDataset {
         }   
         this.targets = new Matrix2D(data_.length, classCount);
         this.targets.data = targetsData;
+    }
+
+    public void normalize() {
+        // get min and max value of data
+        float minVal = this.data.min();
+        float maxVal = this.data.max();
+
+        // apply ratio to value w/ respect to min and max
+        for (int y = 0; y < this.data.shape[0]; y++) {
+            for (int x = 0; x < this.data.shape[1]; x++) {
+                float ratio = (this.data.data[y][x] - minVal) / (maxVal - minVal);
+                this.data.data[y][x] = (1 + ratio) * minVal;
+            }
+        }
     }
 }

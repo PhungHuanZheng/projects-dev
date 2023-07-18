@@ -3,23 +3,27 @@ public class Main {
         // load data from text file
         try {
             // LabelledDataset train = new LabelledDataset("../processing/NNFromScratch/data/MNIST_train.txt", ",", 10);
-            LabelledDataset test = new LabelledDataset("../processing/NNFromScratch/data/MNIST_test.txt", ",", 10);
-            System.out.println(test.data.shape[0]);
-            System.out.println(test.data.shape[1]);
+            // LabelledDataset test = new LabelledDataset("../processing/NNFromScratch/data/MNIST_test.txt", ",", 10);
+            // LabelledDataset test = new LabelledDataset("../processing/NNFromScratch/data/test.txt", ",", 10, 0);
+            LabelledDataset train = new LabelledDataset("../processing/NNFromScratch/data/8x8_train.txt", ",", 10, 64);
+            train.normalize();
+            // LabelledDataset test = new LabelledDataset("../processing/NNFromScratch/data/8x8_test.txt", ",", 10, 64);
 
 
             NeuralNetwork nn = new NeuralNetwork(
-                784,
-                new int[] { 64, 64, 10 },
-                new String[] { "sigmoid", "sigmoid", "sigmoid" });
+                64,
+                new int[] { 16, 16, 10 },
+                new String[] { "relu", "relu", "softmax" }
+            );
+                
+            nn.print();
+            nn.fit(train.data, train.targets, 10);
 
-            nn.feedforward(test.data);
+            
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         
     }
-
 }
