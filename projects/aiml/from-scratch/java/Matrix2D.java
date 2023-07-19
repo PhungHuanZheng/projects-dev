@@ -250,6 +250,17 @@ public class Matrix2D {
     }
 
     /*
+     * Advanced matrix creation 
+     */
+    public static Matrix2D diagFrom(float[] arr) {
+        Matrix2D M = new Matrix2D(arr.length, arr.length);
+        for (int i = 0; i < arr.length; i++) {
+            M.data[i][i] = arr[i];
+        }
+        return M;
+    }
+
+    /*
      * Basic matrix-value operations
      */
     public void mapLambda(Function<Float, Float> lambda) {

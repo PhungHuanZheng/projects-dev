@@ -8,7 +8,7 @@ public class NeuralNetwork {
     int inputNeuronCount;
     String[] activations;
     Method[] actMethods;
-
+    
 
     public static class Activations {
         public static Matrix2D sigmoid(Matrix2D M) {
@@ -21,15 +21,31 @@ public class NeuralNetwork {
             return copyM;
         }
 
-        // public static Matrix2D dsigmoid(Matrix2D M) {
-
-        // }
+        public static Matrix2D dsigmoid(Matrix2D M) {
+            Matrix2D copyM = M.copy();
+            for (int y = 0; y < copyM.shape[0]; y++) {
+                for (int x = 0; x < copyM.shape[1]; x++) {
+                    copyM.data[y][x] = (float)((1 / (1 + Math.exp(-1))) * (1 - (1 / (1 + Math.exp(-1)))));
+                }
+            }
+            return copyM;
+        }
 
         public static Matrix2D relu(Matrix2D M) {
             Matrix2D copyM = M.copy();
             for (int y = 0; y < copyM.shape[0]; y++) {
                 for (int x = 0; x < copyM.shape[1]; x++) {
                     copyM.data[y][x] = copyM.data[y][x] > 0 ? copyM.data[y][x] : 0;
+                }
+            }
+            return copyM;
+        }
+
+        public static Matrix2D drelu(Matrix2D M) {
+            Matrix2D copyM = M.copy();
+            for (int y = 0; y < copyM.shape[0]; y++) {
+                for (int x = 0; x < copyM.shape[1]; x++) {
+                    copyM.data[y][x] = copyM.data[y][x] > 0 ? 1 : 0;
                 }
             }
             return copyM;
@@ -47,6 +63,10 @@ public class NeuralNetwork {
             }
             return copyM;
         }
+    
+        // public static Matrix2D dsoftmax(Matrix2D M) {
+
+        // }
     }
 
     public NeuralNetwork(int inputNeuronCount, int[] layerNeuronCounts, String[] activations) {
@@ -77,7 +97,7 @@ public class NeuralNetwork {
         }
     }
 
-    public void fit(Matrix2D X, Matrix2D y, int batchSize) {
+    public void fit(Matrix2D X, Matrix2D y, int batchSize, int epochs) {
         // check input shape
         if (X.shape[0] != this.inputNeuronCount) {
             throw new RuntimeException(String.format(
@@ -85,16 +105,19 @@ public class NeuralNetwork {
                     X.shape[0], this.inputNeuronCount));
         }
 
-        // iterate over datapoints
-        for (int i = 0; i < this.inputNeuronCount; i++) {
-            Matrix2D datapoint = Matrix2D.fromArray(X.getCol(i), 1);
-            Matrix2D target = Matrix2D.fromArray(y.getRow(i), 1);
+        // iterate over epochs
+        for (int i = 0; i < epochs; i++) {
+            // iterate over datapoints
+            for (int j = 0; j < this.inputNeuronCount; j++) {
+                Matrix2D datapoint = Matrix2D.fromArray(X.getCol(j), 1);
+                Matrix2D target = Matrix2D.fromArray(y.getRow(j), 1);
 
-            Matrix2D output = this.feedforward(datapoint);
-            Matrix2D error = Matrix2D.sub(target, output);
-
-            error.print();
-            return;
+                Matrix2D output = this.feedforward(datapoint);
+                Matrix2D error = Matrix2D.sub(target, output);
+                
+                error.print();
+                return;
+            }
         }
     }
 

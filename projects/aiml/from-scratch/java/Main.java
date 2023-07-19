@@ -17,7 +17,7 @@ public class Main {
             );
                 
             nn.print();
-            nn.fit(train.data, train.targets, 10);
+            nn.fit(train.data, train.targets, 10, 10);
 
             
 

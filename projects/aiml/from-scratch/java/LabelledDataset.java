@@ -13,7 +13,7 @@ public class LabelledDataset {
         int[] targets_ = null;
 
         this.classCount = classCount;
-
+        
         try {
             // get lines in text file
             Path path = Paths.get(filepath);
