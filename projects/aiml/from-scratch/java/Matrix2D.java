@@ -169,6 +169,7 @@ public class Matrix2D {
         // set attributes to new matrix's
         this.shape = resultM.shape;
         this.data = resultM.data;
+        this.size = resultM.shape[0] * resultM.shape[1];
     }
 
     public static Matrix2D matmul(Matrix2D M1, Matrix2D M2) {
@@ -271,10 +272,22 @@ public class Matrix2D {
         }
     }
 
+    public static Matrix2D mapLambda(Matrix2D M, Function<Float, Float> lambda) {
+        Matrix2D copyM = M.copy();
+        copyM.mapLambda(lambda);
+        return copyM;
+    }
+
     public void mapMethod(Object obj, Method method) throws IllegalAccessException, InvocationTargetException {
         Matrix2D M = (Matrix2D)method.invoke(obj, this);
         this.shape = new int[]{M.shape[0], M.shape[1]};
         this.data = M.data;
+    }
+
+    public static Matrix2D mapMethod(Matrix2D M, Object obj, Method method) throws IllegalAccessException, InvocationTargetException {
+        Matrix2D copyM = M.copy();
+        copyM.mapMethod(obj, method);
+        return copyM;
     }
 
     /*
