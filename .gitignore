@@ -3,3 +3,7 @@ __pycache__/
 *.py[cod]
 
 *.ini
+
+*.h5
+*.csv
+*.xlsx
